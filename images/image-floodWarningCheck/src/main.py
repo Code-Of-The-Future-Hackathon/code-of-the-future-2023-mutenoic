@@ -88,7 +88,6 @@ def handler(event, context):
         dataframes.append({list(loc.keys())[0]: hourly_dataframe})
 
     print(len(dataframes))
-    os.chdir(cwd)
 
     for df in dataframes:
         datf = list(df.values())[0]
@@ -96,7 +95,7 @@ def handler(event, context):
         if datf['wave_height'][0] > 3 or datf['wave_height'][1] > 3:
             needs_to_notify = False
             locations_to_change = []
-            docs = db.collection("Regions").where(filter=FieldFilter("marineWarning", "==", False)).stream()
+            docs = db.collection("Regions").where(filter=FieldFilter("floodWarning", "==", False)).stream()
             for doc in docs:
                 document = doc.to_dict()
                 document["ref"] = doc.id
@@ -105,7 +104,7 @@ def handler(event, context):
             for location in locations_to_change:
                 if location['ref'] == datk:
                     needs_to_notify = True
-                    db.collection("Regions").document(datk).set({'marineWarning': True}, merge=True)
+                    db.collection("Regions").document(datk).set({'floodWarning': True}, merge=True)
             
             users_to_notify = []
             if needs_to_notify:
@@ -118,4 +117,4 @@ def handler(event, context):
                 sendPush("Известяване", "Предупреждение за опасно високи вълни по крайбрежието във вашата област.", users_to_notify)
                 
         else: 
-            db.collection("Regions").document(datk).set({'marineWarning': False}, merge=True)
+            db.collection("Regions").document(datk).set({'floodWarning': False}, merge=True)

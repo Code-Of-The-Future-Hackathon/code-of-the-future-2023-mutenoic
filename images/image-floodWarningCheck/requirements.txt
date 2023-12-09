@@ -1,0 +1,6 @@
+firebase_admin==6.2.0
+openmeteo_requests==1.1.0
+pandas==2.0.1
+protobuf==4.25.1
+requests_cache==1.1.1
+retry_requests==2.0.0
