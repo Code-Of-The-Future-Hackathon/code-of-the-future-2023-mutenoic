@@ -10,6 +10,7 @@ abstract class Routes {
   static const SETTINGS = _Paths.SETTINGS;
   static const SIGN_IN = _Paths.SIGN_IN;
   static const SIGN_UP = _Paths.SIGN_UP;
+  static const SENSOR_DETAILS = _Paths.SENSOR_DETAILS;
 }
 
 abstract class _Paths {
@@ -21,4 +22,5 @@ abstract class _Paths {
   static const SETTINGS = '/settings';
   static const SIGN_IN = '/sign-in';
   static const SIGN_UP = '/sign-up';
+  static const SENSOR_DETAILS = '/sensor-details';
 }

@@ -4,6 +4,8 @@ import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/map/bindings/map_binding.dart';
 import '../modules/map/views/map_view.dart';
+import '../modules/sensor_details/bindings/sensor_details_binding.dart';
+import '../modules/sensor_details/views/sensor_details_view.dart';
 import '../modules/sensors/bindings/sensors_binding.dart';
 import '../modules/sensors/views/sensors_view.dart';
 import '../modules/settings/bindings/settings_binding.dart';
@@ -57,6 +59,11 @@ class AppPages {
       name: _Paths.SIGN_UP,
       page: () => const SignUpView(),
       binding: SignUpBinding(),
+    ),
+    GetPage(
+      name: _Paths.SENSOR_DETAILS,
+      page: () => const SensorDetailsView(),
+      binding: SensorDetailsBinding(),
     ),
   ];
 }

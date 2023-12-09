@@ -19,62 +19,6 @@ class HomeController extends GetxController {
   final latlng = Rx<LatLng?>(null);
   final mapController = Rx<GoogleMapController?>(null);
 
-  List<Info> infoList = [];
-
-  @override
-  void onInit() {
-    loadInfo();
-    super.onInit();
-  }
-
-  Future<void> loadInfo() async {
-    var dio = Dio();
-
-    var value = await dio.get('https://data.sensor.community/static/v2/data.json');
-
-    infoList = (value.data as List).map((e) {
-      return Info(
-        e['id'],
-        e['sampling_rate'],
-        DateTime.parse(e['timestamp']),
-        Location(
-          e['location']['id'],
-          e['location']['latitude'],
-          e['location']['longitude'],
-          e['location']['altitude'],
-          e['location']['country'],
-          e['location']['exact_location'],
-          e['location']['indoor'],
-        ),
-        Sensor(
-          e['sensor']['id'],
-          e['sensor']['pin'],
-          SensorType(
-            e['sensor']['sensor_type']['id'],
-            e['sensor']['sensor_type']['name'],
-            e['sensor']['sensor_type']['manufacturer'],
-          ),
-        ),
-        (e['sensordatavalues'] as List).map((e) {
-          var sd = e['value'];
-          double finalValue = 0;
-
-          if (sd is String) {
-            finalValue = double.parse(sd);
-          } else if (sd is double) {
-            finalValue = sd;
-          }
-
-          return SensorDataValue(
-            e['id'],
-            0,
-            e['value_type'],
-          );
-        }).toList(),
-      );
-    }).toList();
-  }
-
   void openDrawer() {
     drawerKey.currentState?.open();
   }
