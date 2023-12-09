@@ -13,6 +13,7 @@ class HomeController extends GetxController {
   //TODO: Implement HomeController
 
   final latlng = Rx<LatLng?>(null);
+  final mapController = Rx<GoogleMapController?>(null);
 
   List<Info> infoList = [];
 
@@ -23,8 +24,6 @@ class HomeController extends GetxController {
   }
 
   Future<void> loadInfo() async {
-    latlng.value = await GeoService().getDeviceLocation();
-
     var dio = Dio();
 
     var value = await dio.get('https://data.sensor.community/static/v2/data.json');
@@ -70,5 +69,23 @@ class HomeController extends GetxController {
         }).toList(),
       );
     }).toList();
+  }
+
+  Future<void> onMapCreated(GoogleMapController controller) async {
+    // controller.setMapStyle(Utils.mapStyles);
+    mapController.value = controller;
+    latlng.value = await GeoService().getDeviceLocation();
+
+    await controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+      target: latlng.value ?? const LatLng(0, 0),
+      zoom: 15,
+    )));
+  }
+
+  void goToDeviceLocation() {
+    mapController.value?.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+      target: latlng.value ?? const LatLng(0, 0),
+      zoom: 15,
+    )));
   }
 }

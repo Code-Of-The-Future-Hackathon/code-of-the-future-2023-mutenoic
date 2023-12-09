@@ -10,10 +10,22 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GoogleMap(
-        initialCameraPosition: CameraPosition(
-          target: controller.latlng.value ?? const LatLng(0, 0),
+      body: Obx(
+        () => GoogleMap(
+          initialCameraPosition: CameraPosition(
+            target: controller.latlng.value ?? const LatLng(0, 0),
+          ),
+          compassEnabled: false,
+          myLocationButtonEnabled: false,
+          myLocationEnabled: true,
+          zoomControlsEnabled: false,
+          onMapCreated: controller.onMapCreated,
+          rotateGesturesEnabled: false,
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: controller.goToDeviceLocation,
+        child: const Icon(Icons.my_location),
       ),
     );
   }
