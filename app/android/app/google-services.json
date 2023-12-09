@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "843011086137",
+    "project_id": "hackathon-burgas",
+    "storage_bucket": "hackathon-burgas.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:843011086137:android:40e388d4c390d5882ebae8",
+        "android_client_info": {
+          "package_name": "com.mutenoic.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGYHSpW_s45Vhf3pZapaqPp4UTXtqR52U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
