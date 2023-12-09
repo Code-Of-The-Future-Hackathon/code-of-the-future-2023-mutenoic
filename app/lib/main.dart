@@ -1,3 +1,4 @@
+import 'package:app/app/data/themes.dart';
 import 'package:app/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -32,12 +33,14 @@ class App extends StatelessWidget {
       systemStatusBarContrastEnforced: false,
       systemNavigationBarColor: Colors.transparent,
       systemNavigationBarContrastEnforced: false,
+      statusBarIconBrightness: Brightness.dark,
     ));
 
     return GetMaterialApp(
       title: "Application",
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
+      theme: Themes.defaultTheme,
     );
   }
 }

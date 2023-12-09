@@ -1,7 +1,8 @@
+import 'package:app/app/modules/home/components/drawer_content.dart';
+import 'package:app/app/modules/map/views/map_view.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:inner_drawer/inner_drawer.dart';
 
 import '../controllers/home_controller.dart';
@@ -32,39 +33,8 @@ class HomeView extends GetView<HomeController> {
         color: Theme.of(context).colorScheme.surface,
       ),
       swipe: false,
-      leftChild: const SizedBox(),
-      scaffold: Scaffold(
-        body: Stack(
-          children: [
-            Obx(
-              () => GoogleMap(
-                initialCameraPosition: CameraPosition(
-                  target: controller.latlng.value ?? const LatLng(0, 0),
-                ),
-                compassEnabled: false,
-                myLocationButtonEnabled: false,
-                myLocationEnabled: true,
-                zoomControlsEnabled: false,
-                onMapCreated: controller.onMapCreated,
-                rotateGesturesEnabled: false,
-              ),
-            ),
-            Align(
-              alignment: const Alignment(-0.9, -0.9),
-              child: FloatingActionButton(
-                onPressed: () {
-                  controller.drawerKey.currentState?.open(direction: InnerDrawerDirection.start);
-                },
-                child: const Icon(Icons.menu),
-              ),
-            ),
-          ],
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: controller.goToDeviceLocation,
-          child: const Icon(Icons.my_location),
-        ),
-      ),
+      leftChild: const DrawerContent(),
+      scaffold: const MapView(),
     );
   }
 }
