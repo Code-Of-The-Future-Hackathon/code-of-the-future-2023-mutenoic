@@ -2,13 +2,17 @@ import 'package:app/app/models/info.dart';
 import 'package:app/app/models/location.dart';
 import 'package:app/app/models/sensor.dart';
 import 'package:app/app/models/sensor_data_values.dart';
+import 'package:app/app/services/geo_service.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../models/sensor_type.dart';
 
 class HomeController extends GetxController {
   //TODO: Implement HomeController
+
+  final latlng = Rx<LatLng?>(null);
 
   List<Info> infoList = [];
 
@@ -19,6 +23,8 @@ class HomeController extends GetxController {
   }
 
   Future<void> loadInfo() async {
+    latlng.value = await GeoService().getDeviceLocation();
+
     var dio = Dio();
 
     var value = await dio.get('https://data.sensor.community/static/v2/data.json');
