@@ -24,12 +24,14 @@ class MapView extends GetView<MapController> {
               zoomControlsEnabled: false,
               onMapCreated: controller.homeController.onMapCreated,
               rotateGesturesEnabled: false,
+              markers: controller.markers.toSet(),
             ),
           ),
           Align(
             alignment: const Alignment(-0.9, -0.9),
             child: FloatingActionButton(
               onPressed: controller.homeController.openDrawer,
+              heroTag: "menu",
               child: const Icon(Icons.menu),
             ),
           ),
