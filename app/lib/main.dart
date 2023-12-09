@@ -1,3 +1,4 @@
+import 'package:app/app/api/firebase_api.dart';
 import 'package:app/app/data/themes.dart';
 import 'package:app/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -14,6 +15,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await FirebaseApi().initNotifications();
 
   runApp(
     const App(),
