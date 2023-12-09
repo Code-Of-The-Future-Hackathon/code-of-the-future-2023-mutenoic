@@ -75,6 +75,10 @@ class HomeController extends GetxController {
     }).toList();
   }
 
+  void openDrawer() {
+    drawerKey.currentState?.open();
+  }
+
   Future<void> onMapCreated(GoogleMapController controller) async {
     // controller.setMapStyle(Utils.mapStyles);
     mapController.value = controller;
