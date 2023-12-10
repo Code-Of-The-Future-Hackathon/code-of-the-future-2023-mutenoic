@@ -4,6 +4,7 @@ import 'package:app/app/modules/map/controllers/map_controller.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class FirebaseApi {
   final firebaseMessaging = FirebaseMessaging.instance;
@@ -28,8 +29,22 @@ class FirebaseApi {
       print('Body: ${message.notification?.body}');
       print('Payload: ${message.data}');
 
-      if (message.notification!.title!.toLowerCase().contains("emergency")) {
-        Get.find<MapController>().emergency.value = true;
+      if (message.data['emergency'] == 'true') {
+        Get.find<MapController>().markers.add(
+              Marker(
+                markerId: MarkerId(message.data['lat']),
+                position: LatLng(
+                  double.parse(message.data['lat']),
+                  double.parse(message.data['long']),
+                ),
+              ),
+            );
+        Get.find<MapController>().onEmergency(
+          LatLng(
+            double.parse(message.data['lat']),
+            double.parse(message.data['long']),
+          ),
+        );
       }
 
       Get.snackbar(

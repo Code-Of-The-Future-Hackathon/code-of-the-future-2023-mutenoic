@@ -10,6 +10,48 @@ class SensorDetailsController extends GetxController {
         double.parse(info.location.longitude),
       );
 
+  String valueType(String type) {
+    switch (type.toLowerCase()) {
+      case "humidity":
+        return "%";
+
+      case "temperature":
+        return "°C";
+
+      case "pressure":
+        return "hPa";
+
+      case "p1":
+      case "p2":
+      case "p10":
+        return "µg/m³";
+
+      case "pm10":
+      case "pm25":
+      case "pm100":
+        return "µg/m³";
+
+      case "radiation":
+        return "µSv/h";
+
+      case "co2":
+        return "ppm";
+
+      case "noise":
+        return "dB";
+
+      case "altitude":
+      case "gps-accuracy":
+        return "m";
+
+      case "gps-satellites":
+        return "satellites";
+
+      default:
+        return "";
+    }
+  }
+
 // SDS011: Particulate Matter (PM) sensor, specifically for PM2.5 and PM10.
 
 // BME280: Environmental sensor measuring temperature, humidity, and barometric pressure.
@@ -63,20 +105,34 @@ class SensorDetailsController extends GetxController {
 // SHT11: Sensor for measuring temperature and humidity.
 
 // NextPM: Particulate Matter (PM) sensor.
+
+  bool particulate = false;
+  bool temperature = false;
+  bool humidity = false;
+  bool pressure = false;
+  bool radiation = false;
+  bool barometric = false;
+  bool co2 = false;
+  bool noise = false;
+  bool altitude = false;
+
   String categorizeSensor(String sensorName) {
     switch (sensorName) {
       case "SDS011":
-        return "Particulate Matter";
+        particulate = true;
+        return "Air quality";
       case "BME280":
+        temperature = true;
+        humidity = true;
+        barometric = true;
         return "temperature, humidity, and barometric";
       case "SPS30DNMS (Laerm)":
-        return "Particulate Matter";
-      case "DHT22":
-      case "HTU21D":
-      case "SHT31":
-        return "temperature and humidity";
+        noise = true;
+        return "Noise";
+
       case "BMP180":
       case "BMP280":
+        barometric = true;
         return "Barometric pressure";
       case "PMS7003":
       case "PMS3003":
@@ -88,16 +144,24 @@ class SensorDetailsController extends GetxController {
       case "PMS6003":
       case "PPD42NS":
       case "NextPM":
+        particulate = true;
         return "Particulate Matter";
       case "Radiation Si22G":
       case "Radiation SBM-19":
       case "Radiation SBM-20":
+        radiation = true;
         return "Gamma radiation";
+
+      case "DHT22":
+      case "HTU21D":
+      case "SHT31":
       case "SHT85":
       case "SHT35":
       case "SHT11":
       case "SCD30":
       case "GPS-NEO-6M":
+        temperature = true;
+        humidity = true;
         return "temperature and humidity";
       default:
         return "Unknown";

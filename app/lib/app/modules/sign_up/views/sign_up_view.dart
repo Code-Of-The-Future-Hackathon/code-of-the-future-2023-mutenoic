@@ -116,6 +116,9 @@ class SignUpView extends GetView<SignUpController> {
                   },
                 ),
               ),
+              const SizedBox(
+                height: 15,
+              ),
               FilledButton(onPressed: controller.selectRegion, child: Text("select_region".tr)),
               const SizedBox(
                 height: 15,

@@ -22,6 +22,8 @@ dependencies:
   flutter_sound: ^9.2.13
   audioplayers: ^5.2.1
   weather_icons: ^3.0.0
+  fl_chart: ^0.65.0
+  peerdart: ^0.5.4
 
 dev_dependencies:
   flutter_lints: ^3.0.0
@@ -30,3 +32,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - lib/app/data/assets/
