@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/chat_details/bindings/chat_details_binding.dart';
+import '../modules/chat_details/views/chat_details_view.dart';
 import '../modules/chats/bindings/chats_binding.dart';
 import '../modules/chats/views/chats_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -71,6 +73,11 @@ class AppPages {
       name: _Paths.CHATS,
       page: () => const ChatsView(),
       binding: ChatsBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHAT_DETAILS,
+      page: () => const ChatDetailsView(),
+      binding: ChatDetailsBinding(),
     ),
   ];
 }

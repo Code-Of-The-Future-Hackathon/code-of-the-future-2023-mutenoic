@@ -1,3 +1,4 @@
+import 'package:app/app/modules/chats/views/chats_view.dart';
 import 'package:app/app/modules/sensors/views/sensors_view.dart';
 import 'package:app/app/modules/weather/views/weather_view.dart';
 import 'package:app/app/services/panic_service.dart';
@@ -22,6 +23,11 @@ class UserContent extends StatelessWidget {
           leading: const Icon(Icons.cloud),
           title: const Text('Weather'),
           onTap: () => Get.to(() => const WeatherView()),
+        ),
+        ListTile(
+          leading: const Icon(Icons.chat),
+          title: const Text('Chats'),
+          onTap: () => Get.to(() => const ChatsView()),
         ),
         // const Spacer(),
         // panic button

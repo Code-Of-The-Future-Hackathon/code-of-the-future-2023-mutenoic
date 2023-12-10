@@ -20,7 +20,7 @@ class SignInView extends GetView<SignInController> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "sign_in".tr,
+                "Sign In",
                 style: Theme.of(context).textTheme.displaySmall,
               ),
               const SizedBox(
@@ -29,15 +29,15 @@ class SignInView extends GetView<SignInController> {
               TextFormField(
                 keyboardType: TextInputType.emailAddress,
                 controller: controller.emailController,
-                decoration: InputDecoration(
-                  label: Text("email".tr),
+                decoration: const InputDecoration(
+                  label: Text("Email"),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return "fill_field".tr;
+                    return "Please fill in the field".tr;
                   }
 
-                  if (!value.isEmail) return "invalid_email".tr;
+                  if (!value.isEmail) return "Invalid Email".tr;
                   return null;
                 },
               ),
@@ -48,7 +48,7 @@ class SignInView extends GetView<SignInController> {
                 () => TextFormField(
                   controller: controller.passwordController,
                   decoration: InputDecoration(
-                    label: Text("password".tr),
+                    label: const Text("Password"),
                     suffixIcon: IconButton(
                       onPressed: () => controller.hidePassword.value = !controller.hidePassword.value,
                       icon: const Icon(Icons.remove_red_eye),
@@ -57,7 +57,7 @@ class SignInView extends GetView<SignInController> {
                   obscureText: controller.hidePassword.value,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return "fill_field".tr;
+                      return "Please fill in the field".tr;
                     }
                     return null;
                   },
@@ -70,7 +70,7 @@ class SignInView extends GetView<SignInController> {
                 alignment: Alignment.centerRight,
                 child: TextButton(
                   onPressed: () => controller.forgotPassword(),
-                  child: Text("${"forgot_password".tr}?"),
+                  child: const Text("Forgot Password?"),
                 ),
               ),
               FilledButton.icon(
@@ -81,7 +81,7 @@ class SignInView extends GetView<SignInController> {
                 ),
                 onPressed: () => controller.login(),
                 icon: const Icon(Icons.login),
-                label: Text("sign".tr),
+                label: const Text("Sign In"),
               ),
               const SizedBox(
                 height: 10,
@@ -94,7 +94,7 @@ class SignInView extends GetView<SignInController> {
                 ),
                 onPressed: () => Get.to(() => const SignUpView()),
                 icon: const Icon(Icons.app_registration_rounded),
-                label: Text("create_account".tr),
+                label: const Text("Create an account"),
               )
             ],
           ),

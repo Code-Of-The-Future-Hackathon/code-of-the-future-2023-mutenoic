@@ -1,3 +1,5 @@
+import 'package:app/app/api/firebase_api.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
@@ -15,10 +17,11 @@ class AuthService {
   }
 
   // Register function
-  Future<bool> register(String email, String password) async {
+  Future<bool> register(String email, String password, Map<String, dynamic> data) async {
     try {
-      await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
+      await _auth.createUserWithEmailAndPassword(email: email, password: password);
+      await FirebaseFirestore.instance.collection("Users").doc(_auth.currentUser!.uid).set(data);
+      FirebaseApi().initNotifications();
       return true;
     } catch (e) {
       print("Registration error: $e");
@@ -35,5 +38,14 @@ class AuthService {
       print("Forgot password error: $e");
       return false;
     }
+  }
+
+  User getProfileInfo() {
+    return FirebaseAuth.instance.currentUser!;
+  }
+
+  // update data
+  Future<DocumentReference> updateData(Map<String, dynamic> data) async {
+    return await FirebaseFirestore.instance.collection("Users").add(data);
   }
 }

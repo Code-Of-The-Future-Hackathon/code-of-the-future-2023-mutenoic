@@ -18,10 +18,9 @@ class SignUpView extends GetView<SignUpController> {
             flexibleSpace: FlexibleSpaceBar(
               centerTitle: true,
               title: Text(
-                "sign_up".tr,
+                "Sign up",
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
-              // expandedTitleScale: ,
               titlePadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             ),
           ),
@@ -35,13 +34,13 @@ class SignUpView extends GetView<SignUpController> {
                 height: 20,
               ),
               TextFormField(
-                decoration: InputDecoration(
-                  label: Text("name".tr),
+                decoration: const InputDecoration(
+                  label: Text("Name"),
                 ),
                 controller: controller.nameController,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return "fill_field".tr;
+                    return "Please fill in the field".tr;
                   }
 
                   return null;
@@ -52,15 +51,15 @@ class SignUpView extends GetView<SignUpController> {
               ),
               TextFormField(
                 controller: controller.emailController,
-                decoration: InputDecoration(
-                  label: Text("email".tr),
+                decoration: const InputDecoration(
+                  label: Text("Email"),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return "fill_field".tr;
+                    return "Please fill in the fields";
                   }
 
-                  if (!value.isEmail) return "invalid_email".tr;
+                  if (!value.isEmail) return "Invalid Email";
                   return null;
                 },
               ),
@@ -71,7 +70,7 @@ class SignUpView extends GetView<SignUpController> {
                 () => TextFormField(
                   controller: controller.passwordController,
                   decoration: InputDecoration(
-                    label: Text("password".tr),
+                    label: const Text("Password"),
                     suffixIcon: IconButton(
                       onPressed: () => controller.hidePassword.value = !controller.hidePassword.value,
                       icon: const Icon(Icons.remove_red_eye),
@@ -80,11 +79,11 @@ class SignUpView extends GetView<SignUpController> {
                   obscureText: controller.hidePassword.value,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return "fill_field".tr;
+                      return "Please fill in the fields";
                     }
 
                     if (value.trim() != controller.confirmPasswordController.text.trim()) {
-                      return "passwords_do_not_match".tr;
+                      return "Passwords do not match";
                     }
                     return null;
                   },
@@ -97,7 +96,7 @@ class SignUpView extends GetView<SignUpController> {
                 () => TextFormField(
                   controller: controller.confirmPasswordController,
                   decoration: InputDecoration(
-                    label: Text("confirm_password".tr),
+                    label: const Text("Confirm password"),
                     suffixIcon: IconButton(
                       onPressed: () => controller.hidePassword.value = !controller.hidePassword.value,
                       icon: const Icon(Icons.remove_red_eye),
@@ -106,10 +105,10 @@ class SignUpView extends GetView<SignUpController> {
                   obscureText: controller.hidePassword.value,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return "fill_field".tr;
+                      return "Please fill in the field".tr;
                     }
                     if (value.trim() != controller.passwordController.text.trim()) {
-                      return "passwords_do_not_match".tr;
+                      return "Passwords do not match";
                     }
 
                     return null;
@@ -119,14 +118,14 @@ class SignUpView extends GetView<SignUpController> {
               const SizedBox(
                 height: 15,
               ),
-              FilledButton(onPressed: controller.selectRegion, child: Text("select_region".tr)),
+              FilledButton(onPressed: controller.selectRegion, child: const Text("Select Region")),
               const SizedBox(
                 height: 15,
               ),
               FilledButton.icon(
                 onPressed: () => controller.register(),
                 icon: const Icon(Icons.app_registration_rounded),
-                label: Text("sign_up".tr),
+                label: const Text("Sign Up"),
               ),
               SizedBox(
                 height: Get.mediaQuery.viewPadding.bottom,

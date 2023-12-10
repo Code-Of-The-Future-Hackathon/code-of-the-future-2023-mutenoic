@@ -27,15 +27,21 @@ class SignUpController extends GetxController {
       return;
     }
 
+    var sd = GeoService.regions.keys.toList();
+
+    sd.sort();
+
     var data = <String, dynamic>{
       "name": nameController.text.trim(),
       "email": emailController.text.trim(),
-      "region": GeoService.regions.keys.toList()[selectedRegion.value],
+      "region": sd[selectedRegion.value],
+      "chats": [],
     };
 
     await AuthService().register(
       emailController.text.trim(),
       passwordController.text.trim(),
+      data,
     );
 
     Navigator.maybePop(Get.context!);

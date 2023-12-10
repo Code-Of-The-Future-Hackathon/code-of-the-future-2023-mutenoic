@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:app/app/modules/map/controllers/map_controller.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,6 +10,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class FirebaseApi {
   final firebaseMessaging = FirebaseMessaging.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   Future<void> initNotifications() async {
     await firebaseMessaging.requestPermission(
       alert: true,
@@ -19,6 +22,13 @@ class FirebaseApi {
       sound: true,
     );
     final fCMToken = await firebaseMessaging.getToken();
+    try {
+      await FirebaseFirestore.instance.collection('Users').doc(_auth.currentUser!.uid).set({
+        'notificationToken': fCMToken,
+      }, SetOptions(merge: true));
+    } catch (e) {
+      print(e);
+    }
     print(fCMToken);
     FirebaseMessaging.onBackgroundMessage(handleBackgroundMessage);
 
