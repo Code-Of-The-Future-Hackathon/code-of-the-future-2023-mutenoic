@@ -20,7 +20,7 @@ class SignInController extends GetxController {
     await AuthService().login(emailController.text.trim(), passwordController.text.trim());
 
     Get.back();
-    ScaffoldMessenger.of(Get.context!).showSnackBar(SnackBar(content: Text("success_login".tr)));
+    ScaffoldMessenger.of(Get.context!).showSnackBar(const SnackBar(content: Text("Successfully login")));
     await HapticFeedback.lightImpact();
   }
 
@@ -86,7 +86,8 @@ class SignInController extends GetxController {
 
     await AuthService().forgotPassword(email);
 
-    ScaffoldMessenger.of(Get.context!).showSnackBar(SnackBar(content: Text("success_forgot_password".tr)));
+    ScaffoldMessenger.of(Get.context!)
+        .showSnackBar(const SnackBar(content: Text("Sent a email to change the passwords")));
   }
 
   void showError(String message) {
