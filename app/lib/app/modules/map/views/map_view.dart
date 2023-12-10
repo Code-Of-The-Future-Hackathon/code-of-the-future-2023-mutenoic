@@ -19,11 +19,9 @@ class MapView extends GetView<MapController> {
           StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
               stream: FirebaseFirestore.instance.collection("Reports").snapshots(),
               builder: (context, snapshot) {
-                List<Marker> markers = [];
-
                 if (snapshot.hasData) {
                   for (var doc in snapshot.data!.docs) {
-                    markers.add(
+                    controller.markers.add(
                       Marker(
                         markerId: MarkerId(doc.id),
                         position: LatLng(
@@ -52,7 +50,7 @@ class MapView extends GetView<MapController> {
                     zoomControlsEnabled: false,
                     onMapCreated: controller.homeController.onMapCreated,
                     rotateGesturesEnabled: false,
-                    markers: markers.toSet(),
+                    markers: controller.markers.toSet(),
                   ),
                 );
               }),

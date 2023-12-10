@@ -40,15 +40,15 @@ class FirebaseApi {
       print('Payload: ${message.data}');
 
       if (message.data['emergency'] == 'true') {
-        Get.find<MapController>().markers.add(
-              Marker(
-                markerId: MarkerId(message.data['lat']),
-                position: LatLng(
-                  double.parse(message.data['lat']),
-                  double.parse(message.data['long']),
-                ),
-              ),
-            );
+        // Get.find<MapController>().markers.add(
+        //       Marker(
+        //         markerId: MarkerId(message.data['lat']),
+        //         position: LatLng(
+        //           double.parse(message.data['lat']),
+        //           double.parse(message.data['long']),
+        //         ),
+        //       ),
+        //     );
         Get.find<MapController>().onEmergency(
           LatLng(
             double.parse(message.data['lat']),
