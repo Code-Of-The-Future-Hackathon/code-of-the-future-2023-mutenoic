@@ -1,1 +1,3 @@
-class ChatService {}
+class ChatService {
+  void joinChat() {}
+}
