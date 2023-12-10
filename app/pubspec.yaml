@@ -24,6 +24,7 @@ dependencies:
   weather_icons: ^3.0.0
   fl_chart: ^0.65.0
   peerdart: ^0.5.4
+  cloud_firestore: ^4.13.5
 
 dev_dependencies:
   flutter_lints: ^3.0.0

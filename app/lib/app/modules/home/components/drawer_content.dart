@@ -19,15 +19,17 @@ class DrawerContent extends StatelessWidget {
               style: TextStyle(fontSize: 25),
             ),
             const SizedBox(height: 25),
-            StreamBuilder(
-              stream: FirebaseAuth.instance.authStateChanges(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return const UserContent();
-                } else {
-                  return const AnonContent();
-                }
-              },
+            Expanded(
+              child: StreamBuilder(
+                stream: FirebaseAuth.instance.authStateChanges(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return const UserContent();
+                  } else {
+                    return const AnonContent();
+                  }
+                },
+              ),
             ),
             const SizedBox(height: 110),
           ],

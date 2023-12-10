@@ -1,5 +1,6 @@
 import 'package:app/app/modules/sensors/views/sensors_view.dart';
 import 'package:app/app/modules/weather/views/weather_view.dart';
+import 'package:app/app/services/panic_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,6 +24,8 @@ class UserContent extends StatelessWidget {
           onTap: () => Get.to(() => const WeatherView()),
         ),
         // const Spacer(),
+        // panic button
+
         ListTile(
           leading: const Icon(Icons.settings),
           title: const Text('Settings'),
@@ -34,6 +37,13 @@ class UserContent extends StatelessWidget {
           onTap: () {
             FirebaseAuth.instance.signOut();
           },
+        ),
+        const Spacer(),
+        ListTile(
+          leading: const Icon(Icons.warning),
+          title: const Text('Panic Button'),
+          onTap: () => PanicService().sendPanic(),
+          tileColor: Colors.red[200],
         ),
       ],
     );
