@@ -15,7 +15,7 @@ class DrawerContent extends StatelessWidget {
           children: [
             SizedBox(height: MediaQuery.of(context).viewPadding.top + 15),
             const Text(
-              "Hackathon",
+              "Caelum",
               style: TextStyle(fontSize: 25),
             ),
             const SizedBox(height: 25),
